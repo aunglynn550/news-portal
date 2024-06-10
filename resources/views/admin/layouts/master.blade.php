@@ -63,6 +63,7 @@
   <script src={{asset('admin/assets/modules/owlcarousel2/dist/owl.carousel.min.js')}}></script>
   <script src={{asset('admin/assets/modules/summernote/summernote-bs4.js')}}></script>
   <script src={{asset('admin/assets/modules/chocolat/dist/js/jquery.chocolat.min.js')}}></script>
+  <script src="assets/modules/upload-preview/assets/js/jquery.uploadPreview.min.js"></script>
 
   <!-- Page Specific JS File -->
   <script src={{asset('admin/assets/js/page/index.js')}}></script>
@@ -70,5 +71,20 @@
   <!-- Template JS File -->
   <script src={{asset('admin/assets/js/scripts.js')}}></script>
   <script src={{asset('admin/assets/js/custom.js')}}></script>
+
+  <script>
+    $.uploadPreview({
+      input_field: "#image-upload",   // Default: .image-upload
+      preview_box: "#image-preview",  // Default: .image-preview
+      label_field: "#image-label",    // Default: .image-label
+      label_default: "Choose File",   // Default: Choose File
+      label_selected: "Change File",  // Default: Change File
+      no_label: false,                // Default: false
+      success_callback: null          // Default: null
+    });
+  </script>
+
+  @stack('scripts')
+
 </body>
 </html>
