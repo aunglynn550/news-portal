@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminProfileUpdateRequest;
+use App\Http\Requests\AdminUpdatePasswordRequest;
 use App\Models\Admin;
 use App\Traits\FileUploadTrait;
 use Illuminate\Http\Request;
@@ -21,37 +22,6 @@ class ProfileController extends Controller
         return view('admin.profile.index', compact('user'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -70,12 +40,17 @@ class ProfileController extends Controller
 
         return redirect()->back();
     }
-
     /**
-     * Remove the specified resource from storage.
+     * Update the specified resource for password.
      */
-    public function destroy(string $id)
+    public function passwordUpdate(AdminUpdatePasswordRequest $request, string $id)
     {
-        //
+
+        $admin = Admin::findOrFail($id);
+        $admin->password = bcrypt($request->password);
+        $admin->save();      
+
+        return redirect()->back();
     }
+
 }
