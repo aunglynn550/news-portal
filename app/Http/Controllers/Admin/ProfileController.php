@@ -37,6 +37,7 @@ class ProfileController extends Controller
         $admin->name = $request->name;
         $admin->email = $request->email;
         $admin->save();
+        toast(__("admin.Aung Updated Successfully"),'success')->width('500');
 
         return redirect()->back();
     }
@@ -49,7 +50,7 @@ class ProfileController extends Controller
         $admin = Admin::findOrFail($id);
         $admin->password = bcrypt($request->password);
         $admin->save();      
-
+        toast(__("admin.Updated Successfully"),'success')->width('500');
         return redirect()->back();
     }
 

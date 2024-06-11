@@ -67,6 +67,9 @@
 
   <!-- Page Specific JS File -->
   <script src={{asset('admin/assets/js/page/index.js')}}></script>
+
+  <!-- Sweet Alert Js -->
+  @include('sweetalert::alert')
   
   <!-- Template JS File -->
   <script src={{asset('admin/assets/js/scripts.js')}}></script>
