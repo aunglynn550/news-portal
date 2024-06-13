@@ -17,7 +17,11 @@
       </li>
       <li class="menu-header">Starter</li>
       <li><a class="nav-link" href="{{ route('admin.language.index') }}">
-                        <span>{{ __('admin.Languages') }}</span>
+        <i class="fas fa-list"></i> <span>{{ __('admin.Languages') }}</span>
+          </a>
+      </li>
+      <li><a class="nav-link" href="{{ route('admin.category.index') }}">
+      <i class="fas fa-list"></i><span>{{ __('admin.category') }}</span>
           </a>
       </li>
      
