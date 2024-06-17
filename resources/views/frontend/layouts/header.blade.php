@@ -1,4 +1,10 @@
+@php
+    $languages = \App\Models\Language::where('status', 1)->get();
+    $FeaturedCategories = \App\Models\Category::where(['status' => 1, 'language' => getLangauge(), 'show_at_nav' => 1])->get();
 
+    $categories = \App\Models\Category::where(['status' => 1, 'language' => getLangauge(), 'show_at_nav' => 0])->get();
+
+@endphp
 
 <header class="bg-light">
     <!-- Navbar  Top-->
@@ -9,16 +15,16 @@
                     <div class="topbar-left topbar-right d-flex">
 
                         <ul class="topbar-sosmed p-0">
-                           
+                         
                             <li>
                                 <a href=""><i class=""></i></a>
                             </li>
-                        
+                           
 
                         </ul>
                         <div class="topbar-text">
 
-                          
+                            {{ date('l, F j, Y') }}
                         </div>
                     </div>
                 </div>
@@ -26,9 +32,9 @@
                     <div class="list-unstyled topbar-right d-flex align-items-center justify-content-end">
                         <div class="topbar_language">
                             <select id="site-language">
-                               
-                                    <option value=""></option>
-                              
+                                @foreach ($languages as $language)
+                                    <option value="{{ $language->lang }}" {{ getLangauge() === $language->lang ? 'selected' : '' }}>{{ $language->name }}</option>
+                                @endforeach
                             </select>
                         </div>
 
@@ -72,24 +78,25 @@
 
                 <div class="collapse navbar-collapse justify-content-between" id="main_nav99">
                     <ul class="navbar-nav ml-auto ">
-                      
+                        @foreach ($FeaturedCategories as $category)
                             <li class="nav-item">
-                                <a class="nav-link active" href=""></a>
+                                <a class="nav-link active" href="">{{ $category->name }}</a>
                             </li>
 
+                        @endforeach
 
-                       
+                        @if (count($categories) > 0)
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"> {{ __('frontend.More') }} </a>
                             <ul class="dropdown-menu animate fade-up">
-                               
-                                <li><a class="dropdown-item icon-arrow" href=""> 
+                                @foreach ($categories as $category)
+                                <li><a class="dropdown-item icon-arrow" href=""> {{ $category->name }}
                                     </a></li>
-                              
+                                @endforeach
 
                             </ul>
                         </li>
-                    
+                        @endif
                         <li class="nav-item"><a class="nav-link" href=""> {{ __('frontend.About Us') }} </a></li>
                         <li class="nav-item"><a class="nav-link" href=""> {{ __('frontend.contact') }} </a></li>
 
@@ -160,23 +167,24 @@
                 <div class="modal-body">
                     <nav class="list-group list-group-flush">
                         <ul class="navbar-nav ">
-                          
+                            @foreach ($FeaturedCategories as $category)
                             <li class="nav-item">
-                                <a class="nav-link active text-dark" href=""> </a>
+                                <a class="nav-link active text-dark" href=""> {{ $category->name }}</a>
                             </li>
-                         
+                            @endforeach
 
-                          
+                            @if (count($categories) > 0)
                             <li class="nav-item">
                                 <a class="nav-link active dropdown-toggle  text-dark" href="#"
                                     data-toggle="dropdown">More </a>
                                 <ul class="dropdown-menu dropdown-menu-left">
-                                   
-                                    <li><a class="dropdown-item" href=""></a></li>                                
+                                    @foreach ($categories as $category)
+                                    <li><a class="dropdown-item" href="">{{ $category->name }}</a></li>
+                                    @endforeach
 
                                 </ul>
                             </li>
-                    
+                            @endif
 
                             <li class="nav-item"><a class="nav-link  text-dark" href=""> {{ __('frontend.About Us') }} </a>
                             </li>
