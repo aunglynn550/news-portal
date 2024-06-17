@@ -21,6 +21,8 @@
   <!-- Data Table -->
   <link rel="stylesheet" href="{{ asset('admin/assets/modules/datatables/datatables.min.css') }}">
   <link rel="stylesheet" href="{{ asset('admin/assets/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css') }}">
+   <!-- Tags Input -->
+  <link rel="stylesheet" href="{{ asset('admin/assets/modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.css') }}">
 
   <!-- Template CSS -->
   <link rel="stylesheet" href={{asset('admin/assets/css/style.css')}}>
@@ -74,8 +76,9 @@
   <script src={{asset('admin/assets/modules/owlcarousel2/dist/owl.carousel.min.js')}}></script>
   <script src={{asset('admin/assets/modules/summernote/summernote-bs4.js')}}></script>
   <script src={{asset('admin/assets/modules/chocolat/dist/js/jquery.chocolat.min.js')}}></script>
-  <script src="assets/modules/upload-preview/assets/js/jquery.uploadPreview.min.js"></script>
-
+  <script src={{asset('admin/assets/modules/upload-preview/assets/js/jquery.uploadPreview.min.js')}}></script>
+  <!-- Tags Input -->
+  <script src="{{ asset('admin/assets/modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js') }}"></script>
   <!-- Select2 JS -->
   <script src="{{ asset('admin/assets/modules/select2/dist/js/select2.full.min.js') }}"></script>
 
@@ -107,15 +110,31 @@
       success_callback: null // Default: null
     });
 
+    // Initialize TagsInput Plugin
+    $(".inputtags").tagsinput('items');
+
     // ADD csrf token in ajax request 
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
     });
-
+    
+  const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
     /** Handle Dynamic delete **/
     $(document).ready(function() {
+
+    
 
       $('.delete-item').on('click', function(e) {
         e.preventDefault();
