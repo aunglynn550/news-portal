@@ -114,7 +114,7 @@ class NewsController extends Controller
 
       
         /** Handle image */
-        $imagePath = $this->handleFileUpload($request, 'image',$news->image);
+        $imagePath = $this->handleFileUpload($request, 'image');
 
         $news->language = $request->language;
         $news->category_id = $request->category;
@@ -183,6 +183,17 @@ class NewsController extends Controller
         } catch (\Throwable $th) {
             throw $th;
         }
+    }
+
+    public function copyNews(string $id)
+    {
+        $news = News::findOrFail($id);
+        $copyNews = $news->replicate();
+        $copyNews->save();
+
+        toast(__('admin.Copied Successfully!'), 'success');
+
+        return redirect()->back();
     }
 
 }
