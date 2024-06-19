@@ -19,8 +19,15 @@ class News extends Model
     }
     public function auther()
     {
-        return $this->belongsTo(Admin::class);
+        return $this->belongsTo(Admin::class);  
     }
+
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
       /** scope for active items */
       public function scopeActiveEntries($query)
       {
@@ -36,4 +43,6 @@ class News extends Model
             'language' => getLangauge()
         ]);
     }
+
+    
 }
