@@ -5,22 +5,23 @@
             <div class="row no-gutters">
                 <div class="col-md-8 ">
                     <div class="card__post-carousel">
-                      
+                        @foreach ($heroSlider as $slider)
+                        @if ($loop->index <= 3)
                             <div class="item">
                                 <!-- Post Article -->
                                 <div class="card__post">
                                     <div class="card__post__body">
-                                        <a href="">
-                                            <img src="" class="img-fluid" alt="">
+                                        <a href="{{ route('news-details', $slider->slug) }}">
+                                            <img src="{{ asset($slider->image) }}" class="img-fluid" alt="">
                                         </a>
                                         <div class="card__post__content bg__post-cover">
                                             <div class="card__post__category">
-                                              
+                                                {{ $slider->category->name }}
                                             </div>
                                             <div class="card__post__title">
                                                 <h2>
-                                                    <a href="">
-                                                    
+                                                    <a href="{{ route('news-details', $slider->slug) }}">
+                                                        {!! truncate($slider->title, 100) !!}
                                                     </a>
                                                 </h2>
                                             </div>
@@ -28,13 +29,13 @@
                                                 <ul class="list-inline">
                                                     <li class="list-inline-item">
                                                         <a href="javascript:;">
-                                                            {{ __('frontend.by') }}
+                                                            {{ __('frontend.by') }} {{ $slider->auther->name }}
                                                         </a>
                                                     </li>
                                                     <li class="list-inline-item">
                                                         <span>
 
-                                                           
+                                                            {{ date('M d, Y', strtotime($slider->created_at)) }}
                                                         </span>
                                                     </li>
                                                 </ul>
@@ -45,26 +46,28 @@
 
                                 </div>
                             </div>
-                      
+                        @endif
+                        @endforeach
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="popular__news-right">
                         <!-- Post Article -->
-                       
+                        @foreach ($heroSlider as $slider)
+                        @if ($loop->index > 3 && $loop->index <= 6)
                         <div class="card__post ">
                             <div class="card__post__body card__post__transition">
-                                <a href="">
-                                    <img src="" class="img-fluid" alt="">
+                                <a href="{{ route('news-details', $slider->slug) }}">
+                                    <img src="{{ asset($slider->image) }}" class="img-fluid" alt="">
                                 </a>
                                 <div class="card__post__content bg__post-cover">
                                     <div class="card__post__category">
-                                        
+                                        {{ $slider->category->name }}
                                     </div>
                                     <div class="card__post__title">
                                         <h5>
-                                            <a href="">
-                                              
+                                            <a href="{{ route('news-details', $slider->slug) }}">
+                                                {!! truncate($slider->title, 100) !!}
                                             </a>
                                         </h5>
                                     </div>
@@ -72,12 +75,12 @@
                                         <ul class="list-inline">
                                             <li class="list-inline-item">
                                                 <a href="javascript:;">
-                                                    by 
+                                                    by {{ $slider->auther->name }}
                                                 </a>
                                             </li>
                                             <li class="list-inline-item">
                                                 <span>
-                                                
+                                                    {{ date('M d, Y', strtotime($slider->created_at)) }}
                                                 </span>
                                             </li>
                                         </ul>
@@ -86,7 +89,9 @@
                             </div>
 
                         </div>
-                       
+                        @endif
+                        @endforeach
+
                     </div>
                 </div>
             </div>
