@@ -63,7 +63,7 @@
                                                         <img src="{{ asset($item->image) }}" width="100" alt="">
                                                     </td>
 
-                                                    <td>{{ $item->title }}</td>
+                                                    <td>{{ truncate($item->title,30)  }}</td>
                                                     <td>{{ $item->category->name }}</td>
                                                    
                                                         <td>

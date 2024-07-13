@@ -7,22 +7,23 @@
                         <h4 class="border_section">{{ __('frontend.recent post') }}</h4>
                     </div>
                     <div class="row ">
-                      
+                        @foreach ($recentNews as $news)
+                        @if ($loop->index <= 1)
                         <div class="col-sm-12 col-md-6 mb-4">
                             <!-- Post Article -->
                             <div class="card__post ">
                                 <div class="card__post__body card__post__transition">
-                                    <a href="">
-                                        <img src="" class="img-fluid" alt="">
+                                    <a href="{{ route('news-details', $news->slug) }}">
+                                        <img src="{{ asset($news->image) }}" class="img-fluid" alt="">
                                     </a>
                                     <div class="card__post__content bg__post-cover">
                                         <div class="card__post__category">
-                                           
+                                            {{ $news->category->name }}
                                         </div>
                                         <div class="card__post__title">
                                             <h5>
-                                                <a href="">
-                                                 
+                                                <a href="{{ route('news-details', $news->slug) }}">
+                                                    {!! truncate($news->title) !!}
                                                 </a>
                                             </h5>
                                         </div>
@@ -30,12 +31,13 @@
                                             <ul class="list-inline">
                                                 <li class="list-inline-item">
                                                     <a href="blog_details.html">
-                                                        {{ __('frontend.by') }} 
+                                                        {{ __('frontend.by') }} {{ $news->auther->name }}
                                                     </a>
                                                 </li>
                                                 <li class="list-inline-item">
                                                     <span>
-                                                       
+
+                                                        {{ date('M d, Y', strtotime($news->create_at)) }}
                                                     </span>
                                                 </li>
                                             </ul>
@@ -45,18 +47,21 @@
 
                             </div>
                         </div>
-                      
+                        @endif
+                        @endforeach
+
                     </div>
                     <div class="row ">
                         <div class="col-sm-12 col-md-6">
                             <div class="wrapp__list__article-responsive">
-                           )
+                                @foreach ($recentNews as $news)
+                                @if ($loop->index > 1 && $loop->index <= 3)
                                 <div class="mb-3">
                                     <!-- Post Article -->
                                     <div class="card__post card__post-list">
                                         <div class="image-sm">
-                                            <a href="">
-                                                <img src="" class="img-fluid" alt="">
+                                            <a href="{{ route('news-details', $news->slug) }}">
+                                                <img src="{{ asset($news->image) }}" class="img-fluid" alt="">
                                             </a>
                                         </div>
 
@@ -68,12 +73,12 @@
                                                     <ul class="list-inline">
                                                         <li class="list-inline-item">
                                                             <span class="text-primary">
-                                                                {{ __('frontend.by') }}
+                                                                {{ __('frontend.by') }} {{ $news->auther->name }}
                                                             </span>
                                                         </li>
                                                         <li class="list-inline-item">
                                                             <span class="text-dark text-capitalize">
-                                                              
+                                                                {{ date('M d, Y', strtotime($news->created_at)) }}
                                                             </span>
                                                         </li>
 
@@ -81,8 +86,8 @@
                                                 </div>
                                                 <div class="card__post__title">
                                                     <h6>
-                                                        <a href="">
-                                                        
+                                                        <a href="{{ route('news-details', $news->slug) }}">
+                                                            {!! truncate($news->title) !!}
                                                         </a>
                                                     </h6>
                                                 </div>
@@ -90,18 +95,20 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                @endif
+                                @endforeach
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-6 ">
                             <div class="wrapp__list__article-responsive">
-                              
+                                @foreach ($recentNews as $news)
+                                @if ($loop->index > 3 && $loop->index <= 5)
                                 <div class="mb-3">
                                     <!-- Post Article -->
                                     <div class="card__post card__post-list">
                                         <div class="image-sm">
-                                            <a href="">
-                                                <img src="" class="img-fluid" alt="">
+                                            <a href="{{ route('news-details', $news->slug) }}">
+                                                <img src="{{ asset($news->image) }}" class="img-fluid" alt="">
                                             </a>
                                         </div>
 
@@ -113,12 +120,12 @@
                                                     <ul class="list-inline">
                                                         <li class="list-inline-item">
                                                             <span class="text-primary">
-                                                                {{ __('frontend.by') }}
+                                                                {{ __('frontend.by') }} {{ $news->auther->name }}
                                                             </span>
                                                         </li>
                                                         <li class="list-inline-item">
                                                             <span class="text-dark text-capitalize">
-                                                                
+                                                                {{ date('M d, Y', strtotime($news->created_at)) }}
                                                             </span>
                                                         </li>
 
@@ -126,8 +133,8 @@
                                                 </div>
                                                 <div class="card__post__title">
                                                     <h6>
-                                                        <a href="">
-                                                  
+                                                        <a href="{{ route('news-details', $news->slug) }}">
+                                                            {!! truncate($news->title) !!}
                                                         </a>
                                                     </h6>
                                                 </div>
@@ -135,7 +142,8 @@
                                         </div>
                                     </div>
                                 </div>
-                              
+                                @endif
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -148,27 +156,28 @@
                         <div class="wrapper__list-number">
 
                             <!-- List Article -->
-                            
+                            @foreach ($popularNews  as $popularNews)
                                 <div class="card__post__list">
                                     <div class="list-number">
                                         <span>
-                                          
+                                            {{ ++$loop->index }}
                                         </span>
                                     </div>
                                     <a href="#" class="category">
-                                      
+                                        {{ $popularNews->category->name }}
                                     </a>
                                     <ul class="list-inline">
                                         <li class="list-inline-item">
                                             <h5>
-                                                <a href="">
-                                          
+                                                <a href="{{ route('news-details', $popularNews->slug) }}">
+                                                    {!! truncate($popularNews->title) !!}
+
                                                 </a>
                                             </h5>
                                         </li>
                                     </ul>
                                 </div>
-                           
+                            @endforeach
                         </div>
                     </aside>
                 </div>
@@ -188,7 +197,7 @@
             <div class="col-md-12">
 
                 <div class="article__entry-carousel">
-                    
+                  
                     <div class="item">
                         <!-- Post Article -->
                         <div class="article__entry">
@@ -206,20 +215,21 @@
                                     </li>
                                     <li class="list-inline-item">
                                         <span>
-                                         
+                                           
                                         </span>
                                     </li>
 
                                 </ul>
                                 <h5>
                                     <a href="">
-                                     
+                                    
                                     </a>
                                 </h5>
 
                             </div>
                         </div>
-                    </div>                
+                    </div>
+                   
 
                 </div>
             </div>
@@ -240,7 +250,7 @@
             <div class="col-md-12">
 
                 <div class="article__entry-carousel">
-                 
+                
                     <div class="item">
                         <!-- Post Article -->
                         <div class="article__entry">
@@ -258,21 +268,21 @@
                                     </li>
                                     <li class="list-inline-item">
                                         <span>
-                                          
+                                           
                                         </span>
                                     </li>
 
                                 </ul>
                                 <h5>
                                     <a href="">
-                                       
+                                        
                                     </a>
                                 </h5>
 
                             </div>
                         </div>
                     </div>
-                   
+                 
 
                 </div>
             </div>
@@ -291,7 +301,7 @@
                         <h4 class="border_section"></h4>
                         <div class="row">
                             <div class="col-md-6">
-                              
+                             
                                 <div class="mb-4">
                                     <!-- Post Article -->
                                     <div class="article__entry">
@@ -309,7 +319,8 @@
                                                 </li>
                                                 <li class="list-inline-item">
                                                     <span>
-                                                     
+
+                                                      
                                                     </span>
                                                 </li>
 
@@ -327,7 +338,7 @@
 
                             </div>
                             <div class="col-md-6">
-                              
+                               
                                 <div class="mb-4">
                                     <!-- Post Article -->
                                     <div class="article__entry">
@@ -340,20 +351,20 @@
                                             <ul class="list-inline">
                                                 <li class="list-inline-item">
                                                     <span class="text-primary">
-                                                        {{ __('frontend.by') }} 
+                                                        {{ __('frontend.by') }}
                                                     </span>
                                                 </li>
                                                 <li class="list-inline-item">
                                                     <span>
 
-                                                     
+                                                      
                                                     </span>
                                                 </li>
 
                                             </ul>
                                             <h5>
                                                 <a href="">
-                                                 
+                                                    
                                                 </a>
                                             </h5>
 
@@ -365,6 +376,7 @@
                         </div>
                     </aside>
 
+                   
 
                     <div class="small_add_banner">
                         <div class="small_add_banner_img">
@@ -373,12 +385,13 @@
                            </a>
                         </div>
                     </div>
-                 
+                
 
                     <aside class="wrapper__list__article mt-5">
                         <h4 class="border_section"></h4>
 
-                        <div class="wrapp__list__article-responsive">                      
+                        <div class="wrapp__list__article-responsive">
+                         
 
                             <!-- Post Article List -->
                             <div class="card__post card__post-list card__post__transition mt-30">
@@ -394,17 +407,18 @@
                                         <div class="card__post__body ">
                                             <div class="card__post__content  ">
                                                 <div class="card__post__category ">
-                                                   
+                                                  
                                                 </div>
                                                 <div class="card__post__author-info mb-2">
                                                     <ul class="list-inline">
                                                         <li class="list-inline-item">
                                                             <span class="text-primary">
-                                                                {{ __('frontend.by') }} 
+                                                                {{ __('frontend.by') }}
                                                             </span>
                                                         </li>
                                                         <li class="list-inline-item">
                                                             <span class="text-dark text-capitalize">
+
                                                             
                                                             </span>
                                                         </li>
@@ -413,11 +427,11 @@
                                                 <div class="card__post__title">
                                                     <h5>
                                                         <a href="">
-                                                         
+                                                            
                                                         </a>
                                                     </h5>
                                                     <p class="d-none d-lg-block d-xl-block mb-0">
-                                                    
+                                                      
                                                     </p>
                                                 </div>
                                             </div>
@@ -426,7 +440,7 @@
 
                                 </div>
                             </div>
-
+                         
 
                         </div>
                     </aside>
@@ -438,52 +452,54 @@
                             <h4 class="border_section">{{ __('frontend.Most Viewed') }}</h4>
                             <div class="wrapper__list__article-small">
 
-                                
+                                @foreach ($mostViewedPosts as $mostViewedNews)
 
                                 <!-- Post Article -->
-                             
+                                @if ($loop->index === 0)
                                 <div class="article__entry">
                                     <div class="article__image">
-                                        <a href="">
-                                            <img src="" alt="" class="img-fluid">
+                                        <a href="{{ route('news-details', $mostViewedNews->slug) }}">
+                                            <img src="{{ asset($mostViewedNews->image) }}" alt="" class="img-fluid">
                                         </a>
                                     </div>
                                     <div class="article__content">
                                         <div class="article__category">
-                                           
+                                            {{ $mostViewedNews->category->name }}
                                         </div>
                                         <ul class="list-inline">
                                             <li class="list-inline-item">
                                                 <span class="text-primary">
-                                                    {{ __('frontend.by') }}
+                                                    {{ __('frontend.by') }} {{ $mostViewedNews->auther->name }}
                                                 </span>
                                             </li>
                                             <li class="list-inline-item">
                                                 <span class="text-dark text-capitalize">
-                                                  
+                                                    {{ date('M d, Y', strtotime($mostViewedNews->created_at)) }}
                                                 </span>
                                             </li>
 
                                         </ul>
                                         <h5>
-                                            <a href="">
-                                               
+                                            <a href="{{ route('news-details', $mostViewedNews->slug) }}">
+                                                {{ truncate($mostViewedNews->title) }}
                                             </a>
                                         </h5>
                                         <p>
-                                          
+                                            {!! truncate($mostViewedNews->content,100) !!}
                                         </p>
-                                        <a href="" class="btn btn-outline-primary mb-4 text-capitalize"> {{__('frontend.read more')}}</a>
+                                        <a href="{{ route('news-details', $mostViewedNews->slug) }}" class="btn btn-outline-primary mb-4 text-capitalize"> {{__('frontend.read more')}}</a>
                                     </div>
                                 </div>
-                             
-                              
+                                @endif
+                                @endforeach
+                                @foreach ($mostViewedPosts as $mostViewedNews)
+                                @if ($loop->index > 0)
                                     <div class="mb-3">
                                         <!-- Post Article -->
                                         <div class="card__post card__post-list">
                                             <div class="image-sm">
-                                                <a href="">
-                                                    <img src="" class="img-fluid" alt="">
+                                                <a href="{{ route('news-details', $mostViewedNews->slug) }}">
+                                                    <img src="{{ asset($mostViewedNews->image) }}" class="img-fluid" alt="">
                                                 </a>
                                             </div>
 
@@ -493,12 +509,12 @@
                                                         <ul class="list-inline">
                                                             <li class="list-inline-item">
                                                                 <span class="text-primary">
-                                                                    {{ __('frontend.by') }}
+                                                                    {{ __('frontend.by') }} {{ $mostViewedNews->auther->name }}
                                                                 </span>
                                                             </li>
                                                             <li class="list-inline-item">
                                                                 <span class="text-dark text-capitalize">
-                                                                   
+                                                                    {{ date('M d, Y', strtotime($mostViewedNews->created_at)) }}
                                                                 </span>
                                                             </li>
 
@@ -506,8 +522,8 @@
                                                     </div>
                                                     <div class="card__post__title">
                                                         <h6>
-                                                            <a href="">
-                                                               
+                                                            <a href="{{ route('news-details', $mostViewedNews->slug) }}">
+                                                                {!! truncate($mostViewedNews->title) !!}
                                                             </a>
                                                         </h6>
                                                     </div>
@@ -515,7 +531,9 @@
                                             </div>
                                         </div>
                                     </div>
-                             
+                                @endif
+                                @endforeach
+
                             </div>
                         </aside>
 
@@ -523,21 +541,22 @@
                             <h4 class="border_section">{{ __('frontend.stay conected') }}</h4>
                             <!-- widget Social media -->
                             <div class="wrap__social__media">
-                                
+                               
                                 <a href="" target="_blank">
-                                    <div class="social__media__widget mt-2" >
+                                    <div class="social__media__widget mt-2" style="background-color">
                                         <span class="social__media__widget-icon">
                                             <i class=""></i>
                                         </span>
                                         <span class="social__media__widget-counter">
-                                            
+                                           
                                         </span>
                                         <span class="social__media__widget-name">
                                            
                                         </span>
                                     </div>
                                 </a>
-                           
+                             
+
                             </div>
                         </aside>
 
@@ -545,7 +564,7 @@
                             <h4 class="border_section">{{ __('frontend.tags') }}</h4>
                             <div class="blog-tags p-0">
                                 <ul class="list-inline">
-                                 
+                                
 
                                     <li class="list-inline-item">
                                         <a href="">
@@ -557,7 +576,7 @@
                             </div>
                         </aside>
 
-                      
+                     
                         <aside class="wrapper__list__article">
                             <h4 class="border_section">{{ __('frontend.Advertise') }}</h4>
                             <a href="">
@@ -566,7 +585,7 @@
                                 </figure>
                             </a>
                         </aside>
-                       
+              
 
                         <aside class="wrapper__list__article">
                             <h4 class="border_section">{{ __('frontend.newsletter') }}</h4>

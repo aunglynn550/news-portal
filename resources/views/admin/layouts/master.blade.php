@@ -133,9 +133,9 @@
             })
     /** Handle Dynamic delete **/
     $(document).ready(function() {
-
     
-
+      $("#basic-datepicker").flatpickr(),
+    
       $('.delete-item').on('click', function(e) {
         e.preventDefault();
         Swal.fire({
