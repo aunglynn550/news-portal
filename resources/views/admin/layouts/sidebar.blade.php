@@ -43,6 +43,10 @@
           <li><a class="nav-link" href="forms-validation.html">Validation</a></li>
         </ul>
       </li>
+      <li><a class="nav-link" href="{{ route('admin.home-section-setting.index') }}">
+        <i class="fas fa-list"></i> <span>{{ __('admin.Home Section Setting') }}</span>
+          </a>
+      </li>
     
     </ul>
 

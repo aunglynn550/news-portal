@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminCategoryCreateRequest;
+use App\Http\Requests\AdminCategoryUpdateRequest;
 use App\Models\Category;
 use App\Models\Language;
 use Illuminate\Http\Request;
@@ -59,7 +60,7 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(AdminCategoryCreateRequest $request, string $id)
+    public function update(AdminCategoryUpdateRequest $request, string $id)
     {
         $category = Category::findOrFail($id);
         $category->name = $request->name;

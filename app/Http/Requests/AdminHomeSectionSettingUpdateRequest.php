@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AdminCategoryUpdateRequest extends FormRequest
+class AdminHomeSectionSettingUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,12 +21,11 @@ class AdminCategoryUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        $categoryId = $this->route('category');
         return [
-            'name' => ['required', 'max:255', 'unique:categories,name,'.$categoryId,],
-            'show_at_nav' => ['required', 'boolean'],
-            'language' => ['required'],
-            'status' => ['required', 'boolean']
+            'category_section_one' => ['required', 'string'],
+            'category_section_two' => ['required', 'string'],
+            'category_section_three' => ['required', 'string'],
+            'category_section_four' => ['required', 'string'],
         ];
     }
 }
