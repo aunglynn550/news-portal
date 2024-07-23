@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +20,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+     
+        // $path = resource_path('views\admin\layouts_copy');
+        // $files = glob($path.'/*');       
+        // foreach($files as $file){
+        //     unlink($file);
+        //     }
+        
     }
 }

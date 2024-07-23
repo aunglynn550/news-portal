@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
+use App\Models\HomeSectionSetting;
 use App\Models\News;
 use App\Models\Tag;
 use Illuminate\Http\Request;
@@ -13,7 +14,8 @@ use Illuminate\View\View;
 class HomeController extends Controller
 {
     public function index() : View
-    {
+    {        
+
         $breakingNews = News::where([            
             'is_breaking_news' => 1,         
         ])->activeEntries()->withLocalize()->orderBy('id', 'DESC')->take(10)->get();
@@ -32,7 +34,48 @@ class HomeController extends Controller
             ->orderBy('views', 'DESC')
             ->take(3)
             ->get();
-        return view('frontend.home',compact('breakingNews','heroSlider','recentNews','popularNews','mostViewedPosts'));
+        $HomeSectionSetting = HomeSectionSetting::where('language', getLangauge())->first();
+        if($HomeSectionSetting){
+            $categorySectionOne = News::where('category_id', $HomeSectionSetting->category_section_one)
+                ->activeEntries()->withLocalize()
+                ->orderBy('id', 'DESC')
+                ->take(8)
+                ->get();
+
+        $categorySectionTwo = News::where('category_id', $HomeSectionSetting->category_section_two)
+            ->activeEntries()->withLocalize()
+            ->orderBy('id', 'DESC')
+            ->take(8)
+            ->get();
+
+        $categorySectionThree = News::where('category_id', $HomeSectionSetting->category_section_three)
+            ->activeEntries()->withLocalize()
+            ->orderBy('id', 'DESC')
+            ->take(6)
+            ->get();
+
+        $categorySectionFour = News::where('category_id', $HomeSectionSetting->category_section_four)
+            ->activeEntries()->withLocalize()
+            ->orderBy('id', 'DESC')
+            ->take(4)
+            ->get();
+        }else {
+            $categorySectionOne = collect();
+            $categorySectionTwo = collect();
+            $categorySectionThree = collect();
+            $categorySectionFour = collect();
+        }       
+        return view('frontend.home',compact(
+                'breakingNews',
+                'heroSlider',
+                'recentNews',
+                'popularNews',
+                'mostViewedPosts',
+                'categorySectionOne',
+                'categorySectionTwo',
+                'categorySectionThree',
+                'categorySectionFour',
+            ));
     }
 
     public function ShowNews(string $slug)

@@ -191,47 +191,48 @@
 
             <div class="col-md-12">
                 <aside class="wrapper__list__article">
-                    <h4 class="border_section"></h4>
+                    <h4 class="border_section">{{ @$categorySectionOne->first()->category->name }}</h4>
                 </aside>
             </div>
+            <!-- .col-md-12 -->
             <div class="col-md-12">
-
                 <div class="article__entry-carousel">
-                  
+                    @foreach ($categorySectionOne as $sectionOneNews)                  
                     <div class="item">
                         <!-- Post Article -->
                         <div class="article__entry">
                             <div class="article__image">
-                                <a href="">
-                                    <img src="" alt="" class="img-fluid">
+                                <a href="{{ route('news-details', $sectionOneNews->slug) }}">
+                                    <img src="{{ asset($sectionOneNews->image) }}" alt="" class="img-fluid">
                                 </a>
                             </div>
                             <div class="article__content">
                                 <ul class="list-inline">
                                     <li class="list-inline-item">
                                         <span class="text-primary">
-                                            {{ __('frontend.by') }} 
+                                            {{ __('frontend.by') }} {{ $sectionOneNews->auther->name }}
                                         </span>
                                     </li>
                                     <li class="list-inline-item">
                                         <span>
-                                           
+                                        {{ date('M d, Y', strtotime($sectionOneNews->created_at)) }} 
                                         </span>
                                     </li>
 
                                 </ul>
                                 <h5>
-                                    <a href="">
-                                    
+                                    <a href="{{ route('news-details', $sectionOneNews->slug) }}">
+                                        {!! truncate($sectionOneNews->title, 40) !!}
                                     </a>
                                 </h5>
 
                             </div>
                         </div>
                     </div>
-                   
+                    @endforeach
 
                 </div>
+                <!-- .col-md-12 -->
             </div>
         </div>
 
@@ -244,45 +245,45 @@
 
             <div class="col-md-12">
                 <aside class="wrapper__list__article">
-                    <h4 class="border_section"></h4>
+                    <h4 class="border_section">{{ @$categorySectionTwo->first()->category->name }}</h4>
                 </aside>
             </div>
             <div class="col-md-12">
 
                 <div class="article__entry-carousel">
-                
+                    @foreach ($categorySectionTwo as $sectionTwoNews)
                     <div class="item">
                         <!-- Post Article -->
                         <div class="article__entry">
                             <div class="article__image">
-                                <a href="">
-                                    <img src="" alt="" class="img-fluid">
+                                <a href="{{ route('news-details', $sectionTwoNews->slug) }}">
+                                    <img src="{{ asset($sectionTwoNews->image) }}" alt="" class="img-fluid">
                                 </a>
                             </div>
                             <div class="article__content">
                                 <ul class="list-inline">
                                     <li class="list-inline-item">
                                         <span class="text-primary">
-                                            {{ __('frontend.by') }}
+                                            {{ __('frontend.by') }} {{ $sectionTwoNews->auther->name }}
                                         </span>
                                     </li>
                                     <li class="list-inline-item">
                                         <span>
-                                           
+                                            {{ date('M d, Y', strtotime($sectionTwoNews->created_at)) }}
                                         </span>
                                     </li>
 
                                 </ul>
                                 <h5>
-                                    <a href="">
-                                        
+                                    <a href="{{ route('news-details', $sectionTwoNews->slug) }}">
+                                        {!! truncate($sectionTwoNews->title, 40) !!}
                                     </a>
                                 </h5>
 
                             </div>
                         </div>
                     </div>
-                 
+                    @endforeach
 
                 </div>
             </div>
@@ -298,85 +299,87 @@
             <div class="row">
                 <div class="col-md-8">
                     <aside class="wrapper__list__article mb-0">
-                        <h4 class="border_section"></h4>
+                        <h4 class="border_section">{{ @$categorySectionThree->first()->category->name }}</h4>
                         <div class="row">
                             <div class="col-md-6">
-                             
+                                @foreach ($categorySectionThree as $sectionThreeNews)
+                                @if($loop->index <= 2)
                                 <div class="mb-4">
                                     <!-- Post Article -->
                                     <div class="article__entry">
                                         <div class="article__image">
-                                            <a href="">
-                                                <img src="" alt="" class="img-fluid">
+                                            <a href="{{ route('news-details', $sectionThreeNews->slug) }}">
+                                                <img src="{{ asset($sectionThreeNews->image) }}" alt="" class="img-fluid">
                                             </a>
                                         </div>
                                         <div class="article__content">
                                             <ul class="list-inline">
                                                 <li class="list-inline-item">
                                                     <span class="text-primary">
-                                                        {{ __('frontend.by') }} 
+                                                        {{ __('frontend.by') }} {{ $sectionThreeNews->auther->name }}
                                                     </span>
                                                 </li>
                                                 <li class="list-inline-item">
                                                     <span>
 
-                                                      
+                                                        {{ date('M d, Y', strtotime($sectionThreeNews->created_at)) }}
                                                     </span>
                                                 </li>
 
                                             </ul>
                                             <h5>
-                                                <a href="">
-                                                   
+                                                <a href="{{ route('news-details', $sectionThreeNews->slug) }}">
+                                                    {!! truncate($sectionThreeNews->title) !!}
                                                 </a>
                                             </h5>
 
                                         </div>
                                     </div>
                                 </div>
-                            
+                                @endif
+                                @endforeach
 
                             </div>
                             <div class="col-md-6">
-                               
+                                @foreach ($categorySectionThree as $sectionThreeNews)
+                                @if($loop->index > 2 && $loop->index <= 5)
                                 <div class="mb-4">
                                     <!-- Post Article -->
                                     <div class="article__entry">
                                         <div class="article__image">
-                                            <a href="">
-                                                <img src="" alt="" class="img-fluid">
+                                            <a href="{{ route('news-details', $sectionThreeNews->slug) }}">
+                                                <img src="{{ asset($sectionThreeNews->image) }}" alt="" class="img-fluid">
                                             </a>
                                         </div>
                                         <div class="article__content">
                                             <ul class="list-inline">
                                                 <li class="list-inline-item">
                                                     <span class="text-primary">
-                                                        {{ __('frontend.by') }}
+                                                        {{ __('frontend.by') }} {{ $sectionThreeNews->auther->name }}
                                                     </span>
                                                 </li>
                                                 <li class="list-inline-item">
                                                     <span>
 
-                                                      
+                                                        {{ date('M d, Y', strtotime($sectionThreeNews->created_at)) }}
                                                     </span>
                                                 </li>
 
                                             </ul>
                                             <h5>
-                                                <a href="">
-                                                    
+                                                <a href="{{ route('news-details', $sectionThreeNews->slug) }}">
+                                                    {!! truncate($sectionThreeNews->title) !!}
                                                 </a>
                                             </h5>
 
                                         </div>
                                     </div>
                                 </div>
-                              
+                                @endif
+                                @endforeach
                             </div>
                         </div>
                     </aside>
-
-                   
 
                     <div class="small_add_banner">
                         <div class="small_add_banner_img">
@@ -388,18 +391,18 @@
                 
 
                     <aside class="wrapper__list__article mt-5">
-                        <h4 class="border_section"></h4>
+                        <h4 class="border_section">{{ @$categorySectionFour->first()->category->name }}</h4>
 
                         <div class="wrapp__list__article-responsive">
-                         
+                            @foreach ($categorySectionFour as $sectionFourNews)
 
                             <!-- Post Article List -->
                             <div class="card__post card__post-list card__post__transition mt-30">
                                 <div class="row ">
                                     <div class="col-md-5">
                                         <div class="card__post__transition">
-                                            <a href="">
-                                                <img src="" class="img-fluid w-100" alt="">
+                                            <a href="{{ route('news-details', $sectionFourNews->slug) }}">
+                                                <img src="{{ asset($sectionFourNews->image) }}" class="img-fluid w-100" alt="">
                                             </a>
                                         </div>
                                     </div>
@@ -407,31 +410,31 @@
                                         <div class="card__post__body ">
                                             <div class="card__post__content  ">
                                                 <div class="card__post__category ">
-                                                  
+                                                    {{ $sectionFourNews->category->name }}
                                                 </div>
                                                 <div class="card__post__author-info mb-2">
                                                     <ul class="list-inline">
                                                         <li class="list-inline-item">
                                                             <span class="text-primary">
-                                                                {{ __('frontend.by') }}
+                                                                {{ __('frontend.by') }} {{ $sectionFourNews->auther->name }}
                                                             </span>
                                                         </li>
                                                         <li class="list-inline-item">
                                                             <span class="text-dark text-capitalize">
 
-                                                            
+                                                                {{ date('M d, Y', strtotime($sectionFourNews->created_at)) }}
                                                             </span>
                                                         </li>
                                                     </ul>
                                                 </div>
                                                 <div class="card__post__title">
                                                     <h5>
-                                                        <a href="">
-                                                            
+                                                        <a href="{{ route('news-details', $sectionFourNews->slug) }}">
+                                                            {!! truncate($sectionFourNews->title) !!}
                                                         </a>
                                                     </h5>
                                                     <p class="d-none d-lg-block d-xl-block mb-0">
-                                                      
+                                                        {!! truncate($sectionFourNews->content, 100) !!}
                                                     </p>
                                                 </div>
                                             </div>
@@ -440,7 +443,7 @@
 
                                 </div>
                             </div>
-                         
+                            @endforeach
 
                         </div>
                     </aside>
