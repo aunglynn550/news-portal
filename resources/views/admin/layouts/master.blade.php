@@ -24,6 +24,11 @@
    <!-- Tags Input -->
   <link rel="stylesheet" href="{{ asset('admin/assets/modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.css') }}">
 
+  <!-- Icon Picker -->
+  <link rel="stylesheet" href="{{ asset('admin/assets/css/bootstrap-iconpicker.min.css') }}">
+  <!-- Color Picker -->
+  <link rel="stylesheet" href="{{ asset('admin/assets/modules/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css') }}">
+
   <!-- Template CSS -->
   <link rel="stylesheet" href={{asset('admin/assets/css/style.css')}}>
   <link rel="stylesheet" href={{asset('admin/assets/css/components.css')}}>
@@ -99,6 +104,10 @@
   <script src={{asset('admin/assets/js/scripts.js')}}></script>
   <script src={{asset('admin/assets/js/custom.js')}}></script>
 
+  <!-- Icon Picker -->
+  <script src="{{ asset('admin/assets/js/bootstrap-iconpicker.bundle.min.js') }}"></script>
+  <!-- Color Picker -->
+  <script src="{{ asset('admin/assets/modules/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js') }}"></script>
   <script>
     $.uploadPreview({
       input_field: "#image-upload", // Default: .image-upload
