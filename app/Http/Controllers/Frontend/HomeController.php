@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Comment;
 use App\Models\HomeSectionSetting;
 use App\Models\News;
+use App\Models\SocialCount;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -64,7 +65,9 @@ class HomeController extends Controller
             $categorySectionTwo = collect();
             $categorySectionThree = collect();
             $categorySectionFour = collect();
-        }       
+        }  
+        $socialCounts = SocialCount::where(['status' => 1, 'language' => getLangauge()])->get(); 
+        $mostCommonTags = $this->mostCommonTags();    
         return view('frontend.home',compact(
                 'breakingNews',
                 'heroSlider',
@@ -75,6 +78,8 @@ class HomeController extends Controller
                 'categorySectionTwo',
                 'categorySectionThree',
                 'categorySectionFour',
+                'socialCounts',
+                'mostCommonTags',
             ));
     }
 
