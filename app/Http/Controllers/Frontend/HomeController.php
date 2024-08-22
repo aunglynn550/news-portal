@@ -132,7 +132,7 @@ class HomeController extends Controller
 
                     $query->where('name', 'like','%'.$request->search.'%');
                 });
-            })->activeEntries()->withLocalize()->get();
+            })->activeEntries()->withLocalize()->paginate(1);
         }
 
         return view('frontend.news', compact('news'));
