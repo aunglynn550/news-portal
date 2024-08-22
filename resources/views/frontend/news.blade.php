@@ -101,7 +101,7 @@
                         <!-- .row -->
                     </aside>
                     <!-- Pagination -->
-                    {{ $news->links() }}
+                    {{ $news->appends(request()->query())->links() }}
                 </div>
                 <div class="col-md-4">
                     <div class="sidebar-sticky">
