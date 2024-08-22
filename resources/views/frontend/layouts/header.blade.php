@@ -115,12 +115,12 @@
                     <div class="top-search navigation-shadow">
                         <div class="container">
                             <div class="input-group ">
-                                <form action="" method="GET">
+                                <form action="{{ route('news') }}" method="GET">
 
                                     <div class="row no-gutters mt-3">
                                         <div class="col">
                                             <input class="form-control border-secondary border-right-0 rounded-0"
-                                                type="search" value="" placeholder="Search "
+                                                type="search" value="gf" placeholder="gg "
                                                 id="example-search-input4" name="search">
                                         </div>
                                         <div class="col-auto">
@@ -146,7 +146,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="widget__form-search-bar  ">
-                        <form action="" method="GET">
+                        <form action="{{ route('news') }}" method="GET">
                             <div class="row no-gutters">
                                 <div class="col">
                                     <input class="form-control border-secondary border-right-0 rounded-0" value=""

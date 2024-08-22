@@ -112,8 +112,30 @@ class HomeController extends Controller
             ->activeEntries()
             ->withLocalize()
             ->take(5)
-            ->get();            
-       return view('frontend.news-details', compact('news', 'recentNews', 'nextPost', 'previousPost', 'relatedPosts','mostCommonTags'));
+            ->get();      
+        $socialCounts = SocialCount::where(['status' => 1, 'language' => getLangauge()])->get();      
+       return view('frontend.news-details', compact('news', 'recentNews', 'nextPost', 'previousPost', 'relatedPosts','socialCounts','mostCommonTags'));
+    }
+
+    public function news(Request $request){
+
+        if($request->has('search')){
+
+            $news = News::where(function($query) use ($request) {
+                
+                $query->where(function($query) use ($request){
+
+                    $query->where('title', 'like','%'.$request->search.'%')
+                        ->orWhere('content', 'like','%'.$request->search.'%');
+
+                })->orWhereHas('category', function($query) use ($request){
+
+                    $query->where('name', 'like','%'.$request->search.'%');
+                });
+            })->activeEntries()->withLocalize()->get();
+        }
+
+        return view('frontend.news', compact('news'));
     }
     public function countView($news)
     {
