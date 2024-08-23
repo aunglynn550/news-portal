@@ -134,8 +134,10 @@ class HomeController extends Controller
                 });
             })->activeEntries()->withLocalize()->paginate(1);
         }
+        $recentNews = News::with(['category', 'auther'])
+            ->activeEntries()->withLocalize()->orderBy('id', 'DESC')->take(4)->get();
 
-        return view('frontend.news', compact('news'));
+        return view('frontend.news', compact('news','recentNews'));
     }
     public function countView($news)
     {
