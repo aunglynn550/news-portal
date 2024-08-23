@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Comment;
 use App\Models\HomeSectionSetting;
 use App\Models\News;
@@ -119,25 +120,37 @@ class HomeController extends Controller
 
     public function news(Request $request){
 
-        if($request->has('search')){
+        $news = News::query();
 
-            $news = News::where(function($query) use ($request) {
-                
-                $query->where(function($query) use ($request){
+        $news->when($request->has('tag'), function($query) use ($request){
+            $query->whereHas('tags', function($query) use ($request){
+                $query->where('name', $request->tag);
+            });
+        });
 
-                    $query->where('title', 'like','%'.$request->search.'%')
-                        ->orWhere('content', 'like','%'.$request->search.'%');
+        $news->when($request->has('category') && !empty($request->category), function($query) use ($request) {
+            $query->whereHas('category', function($query) use ($request) {
+                $query->where('slug', $request->category);
+            });
+        });
 
-                })->orWhereHas('category', function($query) use ($request){
+        $news->when($request->has('search'), function($query) use ($request) {
+            $query->where(function($query) use ($request){
+                $query->where('title', 'like','%'.$request->search.'%')
+                    ->orWhere('content', 'like','%'.$request->search.'%');
+            })->orWhereHas('category', function($query) use ($request){
+                $query->where('name', 'like','%'.$request->search.'%');
+            });
+        });
 
-                    $query->where('name', 'like','%'.$request->search.'%');
-                });
-            })->activeEntries()->withLocalize()->paginate(1);
-        }
+        $news = $news->activeEntries()->withLocalize()->paginate(20);
         $recentNews = News::with(['category', 'auther'])
             ->activeEntries()->withLocalize()->orderBy('id', 'DESC')->take(4)->get();
 
-        return view('frontend.news', compact('news','recentNews'));
+        $mostCommonTags = $this->mostCommonTags();
+
+        $categories = Category::where(['status' => 1, 'language' => getLangauge()])->get();
+        return view('frontend.news', compact('news','recentNews','mostCommonTags','categories'));
     }
     public function countView($news)
     {

@@ -7,15 +7,13 @@
                 <!-- Breadcrumb -->
                 <ul class="breadcrumbs bg-light mb-4">
                     <li class="breadcrumbs__item">
-                        <a href="index.html" class="breadcrumbs__url">
-                            <i class="fa fa-home"></i> Home</a>
+                        <a href="{{ url('/') }}" class="breadcrumbs__url">
+                            <i class="fa fa-home"></i> {{ __('frontend.Home') }}</a>
                     </li>
                     <li class="breadcrumbs__item">
-                        <a href="index.html" class="breadcrumbs__url">News</a>
+                        <a href="javascirt:;" class="breadcrumbs__url">{{ __('frontend.News') }}</a>
                     </li>
-                    <li class="breadcrumbs__item breadcrumbs__item--current">
-                        World
-                    </li>
+
                 </ul>
             </div>
 
@@ -32,14 +30,11 @@
                                 <input type="text" placeholder="Type here" value="{{ request()->search }}" name="search">
                             </div>
                             <div class="col-lg-4">
-                                <select>
+                                <select name="category">
                                     <option value="#">Select Category</option>
-                                    <option value="#">Category 1</option>
-                                    <option value="#">Category 2</option>
-                                    <option value="#">Category 3</option>
-                                    <option value="#">Category 4</option>
-                                    <option value="#">Category 5</option>
-                                    <option value="#">Category 6</option>
+                                    @foreach ($categories as $category)
+                                    <option {{ $category->slug === request()->category ? 'selected' : '' }} value="{{ $category->slug }}">{{ $category->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-lg-3">
@@ -50,8 +45,9 @@
                 </div>
 
                 <aside class="wrapper__list__article ">
-                    <h4 class="border_section">Category title</h4>
-
+                    @if (request()->has('category'))
+                    <h4 class="border_section">{{ __('frontend.Category') }}: {{ request()->category }}</h4>
+                    @endif
                     <div class="row">
                         @foreach ($news as $post)
                         <div class="col-lg-6">
@@ -198,100 +194,34 @@
                     <div class="blog-tags p-0">
                         <ul class="list-inline">
 
+                            @foreach ($mostCommonTags as $tag)
                             <li class="list-inline-item">
-                                <a href="#">
-                                    #property
+                                <a href="{{ route('news', ['tag' => $tag->name]) }}">
+                                    #{{ $tag->name }} ({{ $tag->count }})
                                 </a>
                             </li>
-                            <li class="list-inline-item">
-                                <a href="#">
-                                    #sea
-                                </a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="#">
-                                    #programming
-                                </a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="#">
-                                    #sea
-                                </a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="#">
-                                    #property
-                                </a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="#">
-                                    #life style
-                                </a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="#">
-                                    #technology
-                                </a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="#">
-                                    #framework
-                                </a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="#">
-                                    #sport
-                                </a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="#">
-                                    #game
-                                </a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="#">
-                                    #wfh
-                                </a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="#">
-                                    #sport
-                                </a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="#">
-                                    #game
-                                </a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="#">
-                                    #wfh
-                                </a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="#">
-                                    #framework
-                                </a>
-                            </li>
+                            @endforeach
 
                         </ul>
                     </div>
                 </aside>
 
                 <aside class="wrapper__list__article">
-                    <h4 class="border_section">newsletter</h4>
+                    <h4 class="border_section">{{ __('frontend.newsletter') }}</h4>
                     <!-- Form Subscribe -->
                     <div class="widget__form-subscribe bg__card-shadow">
                         <h6>
-                            The most important world news and events of the day.
+                            {{ __('frontend.The most important world news and events of the day') }}.
                         </h6>
-                        <p><small>Get magzrenvi daily newsletter on your inbox.</small></p>
-                        <div class="input-group ">
-                            <input type="text" class="form-control" placeholder="Your email address">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">sign up</button>
+                        <p><small>{{ __('frontend.Get magzrenvi daily newsletter on your inbox') }}.</small></p>
+                        <form action="" class="newsletter-form">
+                            <div class="input-group ">
+                                <input type="text" class="form-control" name="email" placeholder="Your email address">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary newsletter-button" type="submit">{{ __('frontend.sign up') }}</button>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </aside>
 
