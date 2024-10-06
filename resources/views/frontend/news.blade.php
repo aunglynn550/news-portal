@@ -31,7 +31,7 @@
                             </div>
                             <div class="col-lg-4">
                                 <select name="category">
-                                    <option value="#">Select Category</option>
+                                    <option value="">Select Category</option>
                                     @foreach ($categories as $category)
                                     <option {{ $category->slug === request()->category ? 'selected' : '' }} value="{{ $category->slug }}">{{ $category->name }}</option>
                                     @endforeach
@@ -61,7 +61,7 @@
                                 <!-- .article__image -->
                                 <div class="article__content">
                                     <div class="article__category">
-                                        {{ $post->category->name }}
+                                        {{ @$post->category->name }}
                                     </div>
                                     <ul class="list-inline">
                                         <li class="list-inline-item">
@@ -225,58 +225,36 @@
                     </div>
                 </aside>
 
+                @if ($ad->side_bar_ad_status == 1)
                 <aside class="wrapper__list__article">
-                    <h4 class="border_section">Advertise</h4>
-                    <a href="#">
+                    <h4 class="border_section">{{ __('frontend.Advertise') }}</h4>
+                    <a href="{{ $ad->side_bar_ad_url }}">
                         <figure>
-                            <img src="images/newsimage1.png" alt="" class="img-fluid">
+                            <img src="{{ asset($ad->side_bar_ad) }}" alt="" class="img-fluid">
                         </figure>
                     </a>
                 </aside>
+                @endif
             </div>
         </div>
 
         <div class="clearfix"></div>
     </div>
-
-    <div class="pagination-area">
-        <div class="pagination wow fadeIn animated" data-wow-duration="2s" data-wow-delay="0.5s"
-            style="visibility: visible; animation-duration: 2s; animation-delay: 0.5s; animation-name: fadeIn;">
-            <a href="#">
-                «
-            </a>
-            <a href="#">
-                1
-            </a>
-            <a class="active" href="#">
-                2
-            </a>
-            <a href="#">
-                3
-            </a>
-            <a href="#">
-                4
-            </a>
-            <a href="#">
-                5
-            </a>
-
-            <a href="#">
-                »
-            </a>
-        </div>
     </div>
-    </div>
-    <div class="large_add_banner mb-4">
+    @if ($ad->news_page_ad_status == 1)
+    <div class="large_add_banner my-4">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="large_add_banner_img">
-                        <img src="images/placeholder_large.jpg" alt="adds">
+                        <a href="{{ $ad->news_page_ad_url }}">
+                            <img src="{{ asset($ad->news_page_ad) }}" alt="adds">
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    @endif
 </section>
 @endsection

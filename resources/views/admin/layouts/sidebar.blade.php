@@ -47,6 +47,10 @@
         <i class="fas fa-list"></i> <span>{{ __('admin.Home Section Setting') }}</span>
           </a>
       </li>
+      <li><a class="nav-link" href="{{ route('admin.ad.index') }}">
+        <i class="fas fa-list"></i> <span>{{ __('admin.AD Setting') }}</span>
+          </a>
+      </li>
       <li><a class="nav-link" href="{{ route('admin.social-count.index') }}">
         <i class="fas fa-hashtag"></i><span>{{ __('admin.Social Count') }}</span></a></li>
     </ul>

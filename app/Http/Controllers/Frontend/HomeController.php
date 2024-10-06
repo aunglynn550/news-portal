@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Ad;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\HomeSectionSetting;
@@ -114,8 +115,9 @@ class HomeController extends Controller
             ->withLocalize()
             ->take(5)
             ->get();      
-        $socialCounts = SocialCount::where(['status' => 1, 'language' => getLangauge()])->get();      
-       return view('frontend.news-details', compact('news', 'recentNews', 'nextPost', 'previousPost', 'relatedPosts','socialCounts','mostCommonTags'));
+        $socialCounts = SocialCount::where(['status' => 1, 'language' => getLangauge()])->get(); 
+        $ad = Ad::first();     
+       return view('frontend.news-details', compact('news', 'recentNews', 'nextPost', 'previousPost', 'relatedPosts','socialCounts','mostCommonTags','ad'));
     }
 
     public function news(Request $request){
@@ -134,23 +136,31 @@ class HomeController extends Controller
             });
         });
 
+   
+
+      
         $news->when($request->has('search'), function($query) use ($request) {
             $query->where(function($query) use ($request){
                 $query->where('title', 'like','%'.$request->search.'%')
                     ->orWhere('content', 'like','%'.$request->search.'%');
             })->orWhereHas('category', function($query) use ($request){
                 $query->where('name', 'like','%'.$request->search.'%');
-            });
+            })->with(['category'=> function($query) use ($request){
+                $query->where('name', 'like','%'.$request->search.'%');
+            }]);
         });
 
-        $news = $news->activeEntries()->withLocalize()->paginate(20);
+      
+
+        $news = $news->activeEntries()->withLocalize()->paginate(2);
         $recentNews = News::with(['category', 'auther'])
             ->activeEntries()->withLocalize()->orderBy('id', 'DESC')->take(4)->get();
 
         $mostCommonTags = $this->mostCommonTags();
 
         $categories = Category::where(['status' => 1, 'language' => getLangauge()])->get();
-        return view('frontend.news', compact('news','recentNews','mostCommonTags','categories'));
+        $ad = Ad::first();
+        return view('frontend.news', compact('news','recentNews','mostCommonTags','categories','ad'));
     }
     public function countView($news)
     {
