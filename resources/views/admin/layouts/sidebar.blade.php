@@ -54,6 +54,7 @@
       <li><a class="nav-link" href="{{ route('admin.social-count.index') }}">
         <i class="fas fa-hashtag"></i><span>{{ __('admin.Social Count') }}</span></a></li>
     </ul>
-
+    <li><a class="nav-link" href="{{ route('admin.subscribers.index') }}"><i class="fas fa-users"></i>
+                        <span>{{ __('admin.Subscribers') }}</span></a></li>
   </aside>
 </div>
