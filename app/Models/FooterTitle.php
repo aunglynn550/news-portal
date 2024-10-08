@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Models;
-k
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Ad extends Model
+class FooterTitle extends Model
 {
     use HasFactory;
+
     protected $guarded = [];
 }

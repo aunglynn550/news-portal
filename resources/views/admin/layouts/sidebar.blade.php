@@ -52,9 +52,32 @@
           </a>
       </li>
       <li><a class="nav-link" href="{{ route('admin.social-count.index') }}">
-        <i class="fas fa-hashtag"></i><span>{{ __('admin.Social Count') }}</span></a></li>
+        <i class="fas fa-hashtag"></i><span>{{ __('admin.Social Count') }}</span></a>
+      </li>
+      <li>
+        <a class="nav-link" href="{{ route('admin.social-link.index') }}">{{ __('admin.Social Links') }}</a>
+      </li>
     </ul>
-    <li><a class="nav-link" href="{{ route('admin.subscribers.index') }}"><i class="fas fa-users"></i>
-                        <span>{{ __('admin.Subscribers') }}</span></a></li>
+    <li><a class="nav-link" href="{{ route('admin.subscribers.index') }}">
+          <i class="fas fa-users"></i><span>{{ __('admin.Subscribers') }}</span></a>
+    </li>
+   <ul class="sidebar-menu">
+     <li class="dropdown">
+        <a href="#" class="nav-link has-dropdown"><i class="far fa-file-alt"> </i> <span>{{ __('Footer') }} {{ __('Setting') }}</span></a> 
+        <ul class="dropdown-menu">
+          <li> <a class="nav-link" href="{{ route('admin.social-link.index') }}"> <span>{{ __('admin.Social Links') }}</span></a></li>    
+          <li> <a class="nav-link" href="{{ route('admin.footer-info.index') }}"> <span>{{ __('admin.Footer Info') }}</span></a></li>    
+          <li> <a class="nav-link" href="{{ route('admin.footer-grid-one.index') }}"> <span>{{ __('admin.Footer Grid One')  }}</span></a></li> 
+          <li> <a class="nav-link" href="{{ route('admin.footer-grid-two.index') }}"> <span>{{ __('admin.Footer Grid Two')  }}</span></a></li> 
+          <li> <a class="nav-link" href="{{ route('admin.footer-grid-three.index') }}"> <span>{{ __('admin.Footer Grid Three')  }}</span></a></li> 
+             
+        </ul>
+                      
+             
+    </li>
+   </ul>
+
+   
+          
   </aside>
 </div>

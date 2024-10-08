@@ -1,8 +1,8 @@
 @php
-    $languages = \App\Models\Language::where('status', 1)->get();
-    $FeaturedCategories = \App\Models\Category::where(['status' => 1, 'language' => getLangauge(), 'show_at_nav' => 1])->get();
+$languages = \App\Models\Language::where('status', 1)->get();
+$FeaturedCategories = \App\Models\Category::where(['status' => 1, 'language' => getLangauge(), 'show_at_nav' => 1])->get();
 
-    $categories = \App\Models\Category::where(['status' => 1, 'language' => getLangauge(), 'show_at_nav' => 0])->get();
+$categories = \App\Models\Category::where(['status' => 1, 'language' => getLangauge(), 'show_at_nav' => 0])->get();
 
 @endphp
 
@@ -15,11 +15,11 @@
                     <div class="topbar-left topbar-right d-flex">
 
                         <ul class="topbar-sosmed p-0">
-                         
+                            @foreach ($socialLinks as $link)
                             <li>
-                                <a href=""><i class=""></i></a>
+                                <a href="{{ $link->url }}"><i class="{{ $link->icon }}"></i></a>
                             </li>
-                           
+                            @endforeach
 
                         </ul>
                         <div class="topbar-text">
@@ -33,7 +33,7 @@
                         <div class="topbar_language">
                             <select id="site-language">
                                 @foreach ($languages as $language)
-                                    <option value="{{ $language->lang }}" {{ getLangauge() === $language->lang ? 'selected' : '' }}>{{ $language->name }}</option>
+                                <option value="{{ $language->lang }}" {{ getLangauge() === $language->lang ? 'selected' : '' }}>{{ $language->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -46,7 +46,7 @@
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
 
-                            <li><a  onclick="event.preventDefault();
+                                <li><a onclick="event.preventDefault();
                                 this.closest('form').submit();" href="{{ route('register') }}">{{ __('frontend.Logout') }}</a></li>
 
                             </form>
@@ -79,9 +79,9 @@
                 <div class="collapse navbar-collapse justify-content-between" id="main_nav99">
                     <ul class="navbar-nav ml-auto ">
                         @foreach ($FeaturedCategories as $category)
-                            <li class="nav-item">
-                                <a class="nav-link active" href="">{{ $category->name }}</a>
-                            </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="">{{ $category->name }}</a>
+                        </li>
 
                         @endforeach
 
