@@ -75,9 +75,17 @@
                       
              
     </li>
+    
+   <li class="dropdown">
+        <a href="#" class="nav-link has-dropdown"><i class="far fa-file-alt"></i> <span>Pages</span></a>
+        <ul class="dropdown-menu">
+          <li><a class="nav-link" href="{{ route('admin.about.index') }}">About</a></li>
+          <li><a class="nav-link" href="forms-editor.html">Editor</a></li>
+          <li><a class="nav-link" href="forms-validation.html">Validation</a></li>
+        </ul>
+      </li>
+          
    </ul>
 
-   
-          
   </aside>
 </div>
