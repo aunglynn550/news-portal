@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Setting;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -30,5 +32,10 @@ class AppServiceProvider extends ServiceProvider
         //     unlink($file);
         //     }
         
+        $setting = Setting::pluck('value', 'key')->toArray();
+
+        View::composer('*', function($view) use ($setting){
+            $view->with('settings', $setting);
+        });
     }
 }

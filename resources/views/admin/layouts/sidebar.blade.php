@@ -77,6 +77,10 @@
                       
              
     </li>
+    <li class="{{ setSidebarActive(['admin.setting.*']) }}"><a class="nav-link"
+                        href="{{ route('admin.setting.index') }}"><i class="fas fa-cog"></i>
+                        <span>{{ __('admin.Settings') }}</span></a>
+    </li>
     
    <li class="dropdown">
         <a href="#" class="nav-link has-dropdown"><i class="far fa-file-alt"></i> <span>Pages</span></a>

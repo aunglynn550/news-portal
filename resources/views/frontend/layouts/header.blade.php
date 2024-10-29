@@ -72,7 +72,7 @@ $categories = \App\Models\Category::where(['status' => 1, 'language' => getLanga
                 </div>
                 <figure class="mb-0 mx-auto">
                     <a href="{{ url('/') }}">
-                        <img src="" alt="" class="img-fluid logo">
+                        <img src="{{ asset($settings['site_logo']) }}" alt="" class="img-fluid logo">
                     </a>
                 </figure>
 
